@@ -21,17 +21,50 @@ class AsyncTest {
       new Ceo("ceo_2", "Sundar"),
       new Ceo("ceo_3", "Bill")
   );
+  public static Option<Ceo> getceo(String ceo_id)
+  {
+    for(int i =0; i<ceos.length();i++)
+    {
+      if(ceos.get(i).id.equals(ceo_id))
+      {
+        Option<Ceo> opceo = Option.of(ceos.get(i));
+        return opceo;
+      }
+    }
+    Option<Ceo> opnull = Option.none();
+    return opnull;
+  }
+  public static CompletableFuture<Option<Ceo>> getCeoById(String ceo_id)
+  {
 
-  public static CompletableFuture<Option<Ceo>> getCeoById(String ceo_id) {
-    return null;
+    CompletableFuture<Option<Ceo>> res = CompletableFuture.supplyAsync(()->getceo(ceo_id));
+
+    return res;
+
+  }
+  public static Option<Enterprise> getenterprise(String id)
+  {
+    for(int i = 0;i<enterprises.length();i++)
+    {
+      if(enterprises.get(i).ceo_id.equals(id))
+      {
+        Option<Enterprise> openter = Option.of(enterprises.get(i));
+        return openter;
+      }
+    }
+    Option<Enterprise> opnull = Option.none();
+    return opnull;
+  }
+  public static CompletableFuture<Option<Enterprise>> getEnterpriseByCeoId(String ceo_id)
+  {
+    CompletableFuture<Option<Enterprise>> res = CompletableFuture.supplyAsync(()->getenterprise(ceo_id));
+    return res;
   }
 
-  public static CompletableFuture<Option<Enterprise>> getEnterpriseByCeoId(String ceo_id) {
-    return null;
-  }
-
-  public static CompletableFuture<Tuple2<Option<Ceo>, Option<Enterprise>>> getCEOAndEnterprise(String ceo_id) {
-    return null;
+  public static CompletableFuture<Tuple2<Option<Ceo>, Option<Enterprise>>> getCEOAndEnterprise(String ceo_id)
+  {
+    CompletableFuture<Tuple2<Option<Ceo>,Option<Enterprise>>> res = CompletableFuture.supplyAsync(()->new Tuple2<>(getceo(ceo_id),getenterprise(ceo_id)));
+    return res;
   }
 
 }
