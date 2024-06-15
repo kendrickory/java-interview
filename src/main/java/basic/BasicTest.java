@@ -25,13 +25,13 @@ public class BasicTest {
         Option<Integer> ores = Option.of(res);
         return ores;
       }
-      catch
+      catch(Exception e)
       {
-        Option<Integer> onull = Option.none();
+        Option<Integer> onull = Option.of(null);
         return onull;
       }
     }
-    return Option.none();
+    return Option.of(null);
 
   }
 }

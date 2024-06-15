@@ -4,7 +4,10 @@ import io.vavr.collection.List;
 import io.vavr.*;
 import io.vavr.control.Option;
 
+import javax.swing.text.html.Option;
 import java.util.concurrent.CompletableFuture;
+
+import java.util.List;
 
 /**
  * You should complete the function in this class
@@ -23,7 +26,7 @@ class AsyncTest {
   );
   public static Option<Ceo> getceo(String ceo_id)
   {
-    for(int i =0; i<ceos.length();i++)
+    for(int i =0; i<ceos.size();i++)
     {
       if(ceos.get(i).id.equals(ceo_id))
       {
@@ -31,7 +34,7 @@ class AsyncTest {
         return opceo;
       }
     }
-    Option<Ceo> opnull = Option.none();
+    Option<Ceo> opnull = Option.of(null);
     return opnull;
   }
   public static CompletableFuture<Option<Ceo>> getCeoById(String ceo_id)
@@ -44,7 +47,7 @@ class AsyncTest {
   }
   public static Option<Enterprise> getenterprise(String id)
   {
-    for(int i = 0;i<enterprises.length();i++)
+    for(int i = 0;i<enterprises.size();i++)
     {
       if(enterprises.get(i).ceo_id.equals(id))
       {
@@ -52,7 +55,7 @@ class AsyncTest {
         return openter;
       }
     }
-    Option<Enterprise> opnull = Option.none();
+    Option<Enterprise> opnull = Option.of(null);
     return opnull;
   }
   public static CompletableFuture<Option<Enterprise>> getEnterpriseByCeoId(String ceo_id)
@@ -63,7 +66,7 @@ class AsyncTest {
 
   public static CompletableFuture<Tuple2<Option<Ceo>, Option<Enterprise>>> getCEOAndEnterprise(String ceo_id)
   {
-    CompletableFuture<Tuple2<Option<Ceo>,Option<Enterprise>>> res = CompletableFuture.supplyAsync(()->new Tuple2<>(getceo(ceo_id),getenterprise(ceo_id)));
+    CompletableFuture<Tuple2<Option<Ceo>,Option<Enterprise>>> res = CompletableFuture.supplyAsync(()->new Tuple2<Option<Ceo>,Option<Enterprise>>(getceo(ceo_id),getenterprise(ceo_id)));
     return res;
   }
 

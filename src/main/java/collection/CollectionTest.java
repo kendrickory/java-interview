@@ -1,5 +1,6 @@
 package collection;
 
+import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -19,9 +20,10 @@ class CollectionTest {
     for(int i = 0; i<input.size();i++)
     {
       Double d = Double.valueOf((input.get(i)*2)+3);
-      for(int j=0; j<5;j++)
+      Double dd = d;
+      for(int j=0; j<4;j++)
       {
-        d *=d;
+        d *=dd;
       }
       lres.add(d);
     }
@@ -42,7 +44,7 @@ class CollectionTest {
         String firstp = input.get(i).substring(0,1).toUpperCase();
         if(input.get(i).length()>1)
         {
-          String secondp = input.get(i).substring(1, input.size());
+          String secondp = input.get(i).substring(1, input.get(i).length());
           lres.add(firstp+secondp+firstp+secondp);
         }
         else
